@@ -121,15 +121,16 @@ jobs:
           if [ "$RUNNER_OS" == "macOS" ]; then
             echo "Have to find out how to modify a finder window in headless mode with AppleScript."
             echo "Asset not ready for $RUNNER_OS"
+            ls temp-mapclient/res/macos/
             #asset=`mapclient/res/macos/*.dmg`
           elif [ "$RUNNER_OS" == "Windows" ]; then
-            ls -lh mapclient/package
+            ls -lh temp-mapclient/package
             if [ "x${{ matrix.variant }}" == "xmapclient" ]; then
               variant=
             else
               variant="-${{ matrix.variant }}"
             fi
-            asset=$GITHUB_WORKSPACE/scripts/mapclient/package/MAP-Client${variant}-${{ matrix.release-name }}.exe
+            asset=$GITHUB_WORKSPACE/scripts/temp-mapclient/package/MAP-Client${variant}-${{ matrix.release-name }}.exe
             # asset=`ls -1 "$GITHUB_WORKSPACE"/mapclient/package/MAP-Client*.exe`
             asset=${asset//\\//}
             echo $asset
