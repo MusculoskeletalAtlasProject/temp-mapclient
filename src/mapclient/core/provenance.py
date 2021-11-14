@@ -30,34 +30,48 @@ def _strip_pip_list_output(output_stream):
 
 
 def _determine_capabilities():
+    print('here 1', flush=True)
     try:
         import mapclientplugins
         mapclientplugins_present = True
     except ModuleNotFoundError:
         mapclientplugins_present = False
 
+    print('here 2', flush=True)
     my_env = os.environ.copy()
     python_executable = sys.executable
 
+    print('here 3', flush=True)
     result = subprocess.run([python_executable, "-m", "pip", "list"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=my_env)
 
+    print('here 4', flush=True)
     output_info = _strip_pip_list_output(result.stdout)
 
+    print('here 5', flush=True)
     mapclientplugins_info = {}
     if mapclientplugins_present:
+        print('here 6', flush=True)
+        print(mapclientplugins.__path__, flush=True)
         for loader, module_name, is_pkg in pkgutil.walk_packages(mapclientplugins.__path__):
             if is_pkg:
                 package_name = PLUGINS_PACKAGE_NAME + '.' + module_name
+                print('here 6a', flush=True)
                 module = import_module(package_name)
+                print('here 6b', flush=True)
+                print(module.__version__, flush=True)
                 mapclientplugins_info[package_name] = {
                     "version": module.__version__ if hasattr(module, '__version__') else "X.Y.Z",
                     "location": module.__location__ if hasattr(module, '__location__') else "",
                 }
 
+    print('here 7', flush=True)
+    print(output_info, flush=True)
+
     return {**output_info, **mapclientplugins_info}
 
 
 def reproducibility_info():
+    print('arrived', flush=True)
     if is_frozen():
         info_file = os.path.join(sys._MEIPASS, FROZEN_PROVENANCE_INFO_FILE)
         with open(info_file) as f:
