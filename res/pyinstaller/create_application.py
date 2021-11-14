@@ -35,11 +35,14 @@ def main(variant):
         '--additional-hooks-dir=hooks',
     ]
 
+    print('okay')
     info = reproducibility_info()
+    print('ingo')
     info_file = FROZEN_PROVENANCE_INFO_FILE
     with open(info_file, 'w') as f:
         f.write(json.dumps(info, default=lambda o: o.__dict__, sort_keys=True, indent=2))
 
+    print('written')
     data = os.pathsep.join([info_file, '.'])
     run_command.append(f'--add-data={data}')
 
@@ -51,6 +54,7 @@ def main(variant):
 
     pyside_dir = os.path.dirname(RefMod.__file__)
 
+    print('system', platform.system())
     if platform.system() == 'Darwin':
         rcc_exe = os.path.join(pyside_dir, "rcc")
         uic_exe = os.path.join(pyside_dir, "uic")
@@ -91,6 +95,7 @@ if __name__ == "__main__":
     parser.add_argument("variant", nargs='?', default='', help="MAP Client variant")
     args = parser.parse_args()
 
+    print('args:', args.variant)
     app_variant = ''
     if args.variant:
         app_variant = f"-{args.variant}"
