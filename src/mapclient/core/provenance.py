@@ -58,13 +58,16 @@ def _determine_capabilities():
                 print('here 6a', flush=True)
                 print(package_name, flush=True)
                 try:
-                    module = import_module(package_name)
-                    print('here 6b', flush=True)
-                    print(module.__version__, flush=True)
-                    mapclientplugins_info[package_name] = {
-                        "version": module.__version__ if hasattr(module, '__version__') else "X.Y.Z",
-                        "location": module.__location__ if hasattr(module, '__location__') else "",
-                    }
+                    if package_name == 'mapclientplugins.argonsceneexporterstep':
+                        print('skipping this package.', flush=True)
+                    else:
+                        module = import_module(package_name)
+                        print('here 6b', flush=True)
+                        print(module.__version__, flush=True)
+                        mapclientplugins_info[package_name] = {
+                            "version": module.__version__ if hasattr(module, '__version__') else "X.Y.Z",
+                            "location": module.__location__ if hasattr(module, '__location__') else "",
+                        }
                 except Exception as e:
                     print('exception happened.', flush=True)
                     print(e, flush=True)
