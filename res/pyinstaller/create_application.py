@@ -38,7 +38,8 @@ def main(variant):
 
     print('okay', flush=True)
     info = reproducibility_info()
-    print('ingo')
+    print('info', flush=True)
+    print(info, flush=True)
     info_file = FROZEN_PROVENANCE_INFO_FILE
     with open(info_file, 'w') as f:
         f.write(json.dumps(info, default=lambda o: o.__dict__, sort_keys=True, indent=2))
@@ -53,6 +54,8 @@ def main(variant):
         data = os.pathsep.join([os.path.join(os.path.abspath(images_dir), name), os.path.join('res', 'images')])
         run_command.append(f'--add-data={data}')
 
+    print('getting pyside2 dir', flush=True)
+    print(RefMod.__file__, flush=True)
     pyside_dir = os.path.dirname(RefMod.__file__)
 
     print('system', platform.system(), flush=True)
