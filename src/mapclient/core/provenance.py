@@ -56,13 +56,18 @@ def _determine_capabilities():
             if is_pkg:
                 package_name = PLUGINS_PACKAGE_NAME + '.' + module_name
                 print('here 6a', flush=True)
-                module = import_module(package_name)
-                print('here 6b', flush=True)
-                print(module.__version__, flush=True)
-                mapclientplugins_info[package_name] = {
-                    "version": module.__version__ if hasattr(module, '__version__') else "X.Y.Z",
-                    "location": module.__location__ if hasattr(module, '__location__') else "",
-                }
+                print(package_name, flush=True)
+                try:
+                    module = import_module(package_name)
+                    print('here 6b', flush=True)
+                    print(module.__version__, flush=True)
+                    mapclientplugins_info[package_name] = {
+                        "version": module.__version__ if hasattr(module, '__version__') else "X.Y.Z",
+                        "location": module.__location__ if hasattr(module, '__location__') else "",
+                    }
+                except Exception as e:
+                    print('exception happened.', flush=True)
+                    print(e, flush=True)
 
     print('here 7', flush=True)
     print(output_info, flush=True)
