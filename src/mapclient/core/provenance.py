@@ -60,7 +60,8 @@ def _determine_capabilities():
                 try:
                     banned_list = [
                         'mapclientplugins.argonsceneexporterstep',
-                        'mapclientplugins.argonviewerstep'
+                        'mapclientplugins.argonviewerstep',
+                        'mapclientplugins.dataembedderstep'
                     ]
                     if package_name in banned_list:
                         print('skipping this package.', flush=True)
