@@ -58,7 +58,11 @@ def _determine_capabilities():
                 print('here 6a', flush=True)
                 print(package_name, flush=True)
                 try:
-                    if package_name == 'mapclientplugins.argonsceneexporterstep':
+                    banned_list = [
+                        'mapclientplugins.argonsceneexporterstep',
+                        'mapclientplugins.argonviewerstep'
+                    ]
+                    if package_name in banned_list:
                         print('skipping this package.', flush=True)
                     else:
                         module = import_module(package_name)
