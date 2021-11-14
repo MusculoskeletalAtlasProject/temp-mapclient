@@ -11,6 +11,7 @@ from mapclient.core.provenance import reproducibility_info
 from mapclient.settings.definitions import FROZEN_PROVENANCE_INFO_FILE
 
 
+print('----------- imported stuff', flush=True)
 # Set Python optimisations on.
 os.environ['PYTHONOPTIMIZE'] = '1'
 
@@ -35,14 +36,14 @@ def main(variant):
         '--additional-hooks-dir=hooks',
     ]
 
-    print('okay')
+    print('okay', flush=True)
     info = reproducibility_info()
     print('ingo')
     info_file = FROZEN_PROVENANCE_INFO_FILE
     with open(info_file, 'w') as f:
         f.write(json.dumps(info, default=lambda o: o.__dict__, sort_keys=True, indent=2))
 
-    print('written')
+    print('written', flush=True)
     data = os.pathsep.join([info_file, '.'])
     run_command.append(f'--add-data={data}')
 
@@ -54,7 +55,7 @@ def main(variant):
 
     pyside_dir = os.path.dirname(RefMod.__file__)
 
-    print('system', platform.system())
+    print('system', platform.system(), flush=True)
     if platform.system() == 'Darwin':
         rcc_exe = os.path.join(pyside_dir, "rcc")
         uic_exe = os.path.join(pyside_dir, "uic")
@@ -91,11 +92,12 @@ def main(variant):
 
 
 if __name__ == "__main__":
+    print('here start')
     parser = argparse.ArgumentParser(prog="create_installer")
     parser.add_argument("variant", nargs='?', default='', help="MAP Client variant")
     args = parser.parse_args()
 
-    print('args:', args.variant)
+    print('args:', args.variant, flush=True)
     app_variant = ''
     if args.variant:
         app_variant = f"-{args.variant}"
