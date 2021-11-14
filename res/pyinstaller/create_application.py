@@ -36,7 +36,8 @@ def main(variant):
         '--additional-hooks-dir=hooks',
     ]
 
-    print('okay', flush=True)
+    print('okay, changed', flush=True)
+    print(reproducibility_info, flush=True)
     info = reproducibility_info()
     print('info', flush=True)
     print(info, flush=True)
