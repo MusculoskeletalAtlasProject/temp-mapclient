@@ -107,8 +107,11 @@ jobs:
             echo "$RUNNER_OS not supported"
             exit 1
           fi
+
           cd $GITHUB_WORKSPACE
           cd scripts
+          $pip_exe installl opencmiss.zinc
+          $python_exe temp-mapclient/res/pyinstaller/opencmisstest.py
           # ${{ steps.get_tag.outputs.tag }}
           if [ "${{ matrix.variant }}" == "mapclient" ]; then
             variant=
