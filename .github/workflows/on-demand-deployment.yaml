@@ -110,7 +110,7 @@ jobs:
 
           cd $GITHUB_WORKSPACE
           cd scripts
-          $pip_exe installl opencmiss.zinc
+          $pip_exe install opencmiss.zinc
           $python_exe temp-mapclient/res/pyinstaller/opencmisstest.py
           # ${{ steps.get_tag.outputs.tag }}
           if [ "${{ matrix.variant }}" == "mapclient" ]; then
