@@ -62,7 +62,8 @@ def _determine_capabilities():
                         'mapclientplugins.argonsceneexporterstep',
                         'mapclientplugins.argonviewerstep',
                         'mapclientplugins.dataembedderstep',
-                        'mapclientplugins.geometricfitstep'
+                        'mapclientplugins.geometricfitstep',
+                        'mapclientplugins.mbfxml2exconverterstep'
                     ]
                     if package_name in banned_list:
                         print('skipping this package.', flush=True)
